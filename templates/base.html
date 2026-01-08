@@ -18,7 +18,7 @@
       <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="blog-header-logo text-dark" href="/">Django Blog</a>
+            <a class="blog-header-logo text-dark" href="/">BlogSphere</a>
           </div>
           <div class="col-4">
             <form action="{% url 'search' %}" method="GET">
@@ -33,8 +33,10 @@
             <a class="btn btn-sm btn-warning" href="{% url 'login' %}">Login</a> &nbsp;
             <a class="btn btn-sm btn-outline-secondary" href="{% url 'register' %}">Register</a>
             {% else %}
+            {% if user.is_staff %}
             <span class="mr-2"><a href="{% url 'dashboard' %}">Dashboard</a></span>
             &nbsp;
+            {% endif %}
             <span><a class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}">Logout</a></span>
             {% endif %}
           </div>
@@ -56,8 +58,47 @@
 
 
 <!--Footer-->
-<footer class="blog-footer">
-  <p>Django blog built with ❤ by <a href="#">Rathan Kumar</a></p>
+<!-- Footer -->
+<footer class="blog-footer mt-5 pt-4 border-top">
+  <div class="container">
+    <div class="row mb-4">
+      <!-- About Section -->
+      <div class="col-md-4 mb-3">
+        <h5>BlogSphere</h5>
+        <p class="text-muted small">Your source for insightful articles, stories, and knowledge sharing. Explore, learn, and grow with us.</p>
+      </div>
+      
+      <!-- Quick Links -->
+      <div class="col-md-4 mb-3">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled small">
+          <li><a href="/" class="text-muted text-decoration-none">Home</a></li>
+          <li><a href="/blogs" class="text-muted text-decoration-none">All Posts</a></li>
+          <li><a href="/dashboard" class="text-muted text-decoration-none">Dashboard</a></li>
+          <li><a href="#" class="text-muted text-decoration-none">Contact</a></li>
+        </ul>
+      </div>
+      
+      <!-- Follow Us -->
+      <div class="col-md-4 mb-3">
+        <h5>Follow Us</h5>
+        <div class="social-links">
+          <a href="#" class="text-muted me-2"><i class="fa fa-facebook"></i></a>
+          <a href="#" class="text-muted me-2"><i class="fa fa-twitter"></i></a>
+          <a href="#" class="text-muted me-2"><i class="fa fa-linkedin"></i></a>
+          <a href="#" class="text-muted me-2"><i class="fa fa-github"></i></a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bottom Footer -->
+    <div class="row border-top pt-3">
+      <div class="col-md-6 small text-muted">
+        <p>&copy; 2025 BlogSphere. All rights reserved.</p>
+      </div>
+      <div class="col-md-6 small text-muted text-md-right">
+        <p>Designed with <i class="fa fa-heart" style="color: #e74c3c;"></i> by <a href="#" class="text-decoration-none text-muted">Rahul Jadav</a></p>
+      </div>
+    </div>
+  </div>
 </footer>
-</body>
-</html>

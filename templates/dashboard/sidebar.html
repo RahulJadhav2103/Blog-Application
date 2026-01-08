@@ -6,7 +6,7 @@
             {% endif %}
             <a class="nav-link text-dark {% if '/categories/' in request.path %}bg-warning{% endif %}" href="{% url 'categories' %}">Categories</a>
             <a class="nav-link text-dark {% if '/posts/' in request.path %}bg-warning{% endif %}" href="{% url 'posts' %}">Posts</a>
-            <a class="nav-link text-dark" href="#">Logout</a>
+            <a class="nav-link text-dark" href="{% url 'logout' %}">Logout</a>
             
         </div>
 </div>
