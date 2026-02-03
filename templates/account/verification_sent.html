@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-vh-100 d-flex align-items-center" style="background-color: white; padding-top: 2rem;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-lg">
+          <div class="card-body p-5">
+            <div class="text-center mb-4">
+              <div class="mb-3">
+                <i class="fas fa-paper-plane" style="font-size: 2.5rem; color: #28a745;"></i>
+              </div>
+              <h2 class="fw-bold text-dark mb-2">Verification Email Sent</h2>
+              <p class="text-muted">Check your inbox for confirmation instructions</p>
+            </div>
+
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-3" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+              {% endfor %}
+            {% endif %}
+
+            <div class="alert alert-success border-0 mb-4" role="alert">
+              <div class="d-flex align-items-start">
+                <i class="fas fa-check-circle me-3 mt-1" style="color: #28a745; font-size: 1.2rem;"></i>
+                <div>
+                  <h5 class="alert-heading mb-2">Email Sent Successfully!</h5>
+                  <p class="mb-0">We've sent a verification link to your email address. Please check your inbox and follow the instructions to confirm your email.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="alert alert-warning border-0 mb-4" role="alert">
+              <div class="d-flex align-items-start">
+                <i class="fas fa-exclamation-triangle me-3 mt-1" style="color: #ff9800; font-size: 1.2rem;"></i>
+                <div>
+                  <h5 class="alert-heading mb-2">Can't Find It?</h5>
+                  <p class="mb-0">Don't forget to check your spam or junk folder. You might also want to whitelist our email address.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-grid gap-2">
+              <a href="{% url 'account_login' %}" class="btn btn-primary py-2 fw-bold">
+                <i class="fas fa-sign-in-alt me-2"></i> Back to Sign In
+              </a>
+              <a href="/" class="btn btn-outline-secondary py-2 fw-bold">
+                <i class="fas fa-home me-2"></i> Go to Home
+              </a>
+            </div>
+
+            <div class="mt-4 text-center">
+              <p class="text-muted small mb-0">Didn't receive an email?</p>
+              <a href="{% url 'account_email' %}" class="text-primary fw-bold text-decoration-none mt-2 d-inline-block">
+                <i class="fas fa-redo me-1"></i> Request New Verification
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style></style>
+{% endblock %}

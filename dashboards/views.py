@@ -6,7 +6,7 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
 # Create your views here.
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def dashboard(request):
     category_count = Category.objects.all().count()
     blogs_count = Blog.objects.all().count()
@@ -85,12 +85,12 @@ def edit_post(request,pk):
     if request.method == 'POST':
         form = PostForm(request.POST,request.FILES, instance=post)
         if form.is_valid():
-            post=form.save()
+            post = form.save(commit=False)
             title = form.cleaned_data['title']
             post.slug = slugify(title) + '-'+str(post.id)
             post.save()
             return redirect('posts')
-    form = PostForm()
+    form = PostForm(instance=post)
     context={
         'form':form,
         'post':post,

@@ -67,3 +67,13 @@ h1, h2, h3, h4, h5, h6 {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+/* Header user dropdown alignment */
+.header-user-dropdown {
+  position: relative;
+}
+.header-user-dropdown .dropdown-menu {
+  left: 0;
+  right: auto;
+  width: 100%;
+}

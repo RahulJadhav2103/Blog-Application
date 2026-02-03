@@ -9,6 +9,7 @@ class CategoryForm(forms.ModelForm):
         fields = '__all__'
         
 class PostForm(forms.ModelForm):
+    featured_image = forms.ImageField(required=False)
     class Meta:
         model = Blog
         fields = ('title', 'category', 'featured_image','short_description','blog_body','status','is_featured')
@@ -16,10 +17,10 @@ class PostForm(forms.ModelForm):
 class UserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ( 'username', 'email', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_superuser','groups', 'user_permissions')
+        fields = ( 'username', 'email',  'is_active', 'is_staff', 'is_superuser','groups', 'user_permissions')
         
 
 class EditUserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
+        fields = ('username', 'email', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')

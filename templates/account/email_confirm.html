@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% comment %} no tag loads needed {% endcomment %}
+
+{% block content %}
+<div class="min-vh-100 d-flex align-items-center" style="background-color: white; padding-top: 2rem;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-lg">
+          <div class="card-body p-5">
+            <div class="text-center mb-4">
+              <div class="mb-3">
+                <i class="fas fa-envelope" style="font-size: 2.5rem; color: #667eea;"></i>
+              </div>
+              <h2 class="fw-bold text-dark mb-2">Confirm Email Address</h2>
+              <p class="text-muted">Verify your email to complete registration</p>
+            </div>
+
+
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-3" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+              {% endfor %}
+            {% endif %}
+
+            <div class="alert alert-info border-0 mb-4" role="alert">
+              <div class="d-flex align-items-start">
+                <i class="fas fa-info-circle me-3 mt-1" style="color: #0c63e4; font-size: 1.2rem;"></i>
+                <div>
+                  <h5 class="alert-heading mb-2">Confirm Your Email</h5>
+                  <p class="mb-0">Please confirm your email address {{ confirmation.email_address.email }} to complete your account setup.</p>
+                </div>
+              </div>
+            </div>
+
+            <form method="post" novalidate>
+              {% csrf_token %}
+              
+              <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">
+                <i class="fas fa-check-circle me-2"></i> Confirm Email Address
+              </button>
+            </form>
+
+            <div class="mt-4 text-center">
+              <p class="text-muted small mb-2">Didn't receive the confirmation email?</p>
+              <a href="{% url 'account_email' %}" class="btn btn-outline-primary btn-sm">
+                <i class="fas fa-redo me-2"></i> Resend Confirmation
+              </a>
+            </div>
+
+            <div class="mt-4 text-center">
+              <p class="text-muted mb-0">
+                Want to go back? <a href="{% url 'account_login' %}" class="text-primary fw-bold text-decoration-none">Back to Sign In</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style></style>
+{% endblock %}

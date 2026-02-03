@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -33,13 +33,19 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.github",
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blogs',
     'crispy_forms',
-    'crispy_bootstrap4',
+    'crispy_bootstrap5',
     'dashboards'
 ]
 
@@ -51,9 +57,19 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'Blog_base.urls'
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+ACCOUNT_ADAPTER = 'Blog_base.adapters.CustomAccountAdapter'
+
+SITE_ID = 1
 
 TEMPLATES = [
     {
@@ -120,17 +136,38 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.2/howto/static-files/
+
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_DIRS = [
-    'Blog_base/static',
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+LOGIN_URL = 'account_login'
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_ON_GET = True
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+ACCOUNT_LOGIN_METHODS = {'username', 'email'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_RATE_LIMITS = {
+    "confirm_email": "1/m"
+}
+
+
+# Email configuration for development
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = "noreply@yourapp.com"
+
