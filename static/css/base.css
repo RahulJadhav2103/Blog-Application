@@ -3,7 +3,10 @@
   --primary-color: #667eea;
   --secondary-color: #764ba2;
 }
-
+.blog-header-logo {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
+  font-size: 2.25rem;
+}
 /* Navbar gradient */
 .navbar {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
